@@ -36,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    Toolbar toolbar;
 
     DbHelper dbHelper;
 
@@ -90,16 +89,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setToolbar() {
 
-        toolbar=findViewById(R.id.toolbar);
-        TextView title=toolbar.findViewById(R.id.title_toolbar);
-        TextView subtitle=toolbar.findViewById(R.id.subtitle_toolbar);
-        ImageButton back=toolbar.findViewById(R.id.back);
-        ImageButton save=toolbar.findViewById(R.id.save);
 
-        title.setText("Attendance App");
-        subtitle.setVisibility(View.GONE);
-        back.setVisibility(View.INVISIBLE);
-        save.setVisibility(View.INVISIBLE);
     }
 
     private void gotoItemActivity(int position) {

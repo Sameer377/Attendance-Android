@@ -25,7 +25,8 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentV
     @NonNull
     @Override
     public StudentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.student_item,parent,false);
+        return  new StudentAdapter.StudentViewHolder(v,onItemClickListener);
     }
 
     @Override
@@ -62,9 +63,9 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentV
 
         public StudentViewHolder(@NonNull View itemView, OnItemClickListener onItemClickListener) {
             super(itemView);
-            roll = itemView.findViewById(R.id.roll);
-            name = itemView.findViewById(R.id.name);
-            status = itemView.findViewById(R.id.status);
+            roll = itemView.findViewById(R.id.roll1);
+            name = itemView.findViewById(R.id.name1);
+            status = itemView.findViewById(R.id.status1);
             cardView = itemView.findViewById(R.id.cardview);
 
             itemView.setOnClickListener(v -> onItemClickListener.onClick(getAdapterPosition()));

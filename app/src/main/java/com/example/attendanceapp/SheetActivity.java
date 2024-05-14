@@ -1,7 +1,10 @@
 package com.example.attendanceapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -14,14 +17,24 @@ import java.util.Calendar;
 public class SheetActivity extends AppCompatActivity {
 
 
+    private String subjectName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sheet);
 
+        Intent intent = getIntent();
+        subjectName=getIntent().getExtras().get("subject").toString();
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        TextView title = toolbar.findViewById(R.id.title_toolbar);
+        title.setText(intent.getExtras().get("month").toString());
+        TextView subTitle = toolbar.findViewById(R.id.subtitle_toolbar);
+        subTitle.setText(subjectName);
         showTable();
     }
 
+    @SuppressLint("ResourceAsColor")
     private void showTable() {
 
         DbHelper dbHelper=new DbHelper(this);
@@ -63,19 +76,17 @@ public class SheetActivity extends AppCompatActivity {
             status_tvs[0][i].setTypeface(status_tvs[0][i].getTypeface(), Typeface.BOLD);
         }
 
+        for (int i=0;i<idArray.length;i++){
+            roll_tvs[i+1].setText(String.valueOf(rollArray[i]));
+            name_tvs[i+1].setText(nameArray[i]);
 
-        for (int i=0;i<rowsize;i++){
-            roll_tvs[i].setText(String.valueOf(rollArray[i-1]));
-            name_tvs[i].setText(nameArray[i-1]);
 
-
-            for (int j=1;j<=DAY_IN_MONTH;j++){
+            for (int j=1;j<DAY_IN_MONTH;j++){
                 String day=String.valueOf(j);
                 if (day.length()==1) day="0"+day;
                 String date =day+"."+month;
-                String status =dbHelper.getStatus(idArray[i-1],date);
-                status_tvs[i][j].setText(status);
-
+                String status =dbHelper.getStatus(idArray[i],date);
+                status_tvs[i+1][j].setText(status);
 
 
             }
@@ -84,11 +95,15 @@ public class SheetActivity extends AppCompatActivity {
         for (int i=0;i<rowsize;i++){
             rows[i]=new TableRow(this);
 
+
             if (i%2==0)
                 rows[i].setBackgroundColor(Color.parseColor("#EEEEEE"));
             else
                 rows[i].setBackgroundColor(Color.parseColor("#E4E4E4"));
 
+            if(i==0){
+                rows[i].setBackgroundResource(R.color.header);
+            }
 
             roll_tvs[i].setPadding(16,16,16,16);
             name_tvs[i].setPadding(16,16,16,16);
@@ -96,8 +111,11 @@ public class SheetActivity extends AppCompatActivity {
             rows[i].addView(roll_tvs[i]);
             rows[i].addView(name_tvs[i]);
 
-            for (int j=1;j<=DAY_IN_MONTH;j++){
+            for (int j=1;j<DAY_IN_MONTH;j++){
                 status_tvs[i][j].setPadding(16,16,16,16);
+                if(status_tvs[i][j].getText().toString().trim()=="A"){
+                    status_tvs[i+1][j].setTextColor(R.color.absent);
+                }
                 rows[i].addView(status_tvs[i][j]);
             }
 

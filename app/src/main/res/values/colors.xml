@@ -4,11 +4,13 @@
     <color name="colorPrimaryDark">#000BE6</color>
     <color name="colorAccent">#1403FF</color>
 
-    <color name="present">#46DB12</color>
-    <color name="absent">#E84343</color>
+    <color name="present">#C8B2F49B</color>
+    <color name="absent">#C6F87979</color>
     <color name="normal">#FFFFFF</color>
 
+<color name="header">#DBE0FC</color>
 
+    <color name="toolbar">#8807D0</color>
 
 
 </resources>

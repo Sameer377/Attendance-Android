@@ -16,19 +16,18 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 
-public class StudentActivity extends AppCompatActivity {
+public class StudentActivity extends AppCompatActivity implements  com.example.attendanceapp.adapter.StudentAdapter.OnItemClickListener {
 
     Toolbar toolbar;
     private String className;
     private String subjectName;
     private int position;
     private RecyclerView recyclerView;
-    public StudentAdapter adapter;
+    public com.example.attendanceapp.adapter.StudentAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private ArrayList<StudentItem> studentItems = new ArrayList<>();
 
@@ -53,40 +52,52 @@ public class StudentActivity extends AppCompatActivity {
         cid=intent.getLongExtra("cid",-1);
 
         setToolbar();
-
-      loadData();
-       loadStatusData();
         recyclerView=findViewById(R.id.student_recycler);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this)); // Set layout manager first
-        adapter= new StudentAdapter(this, studentItems);
-        adapter.setOnItemClickListener(position -> changeStatus(position));
+        adapter= new com.example.attendanceapp.adapter.StudentAdapter(this, studentItems,this);
+//        adapter.setOnItemClickListener(position -> changeStatus(position));
+
+
         recyclerView.setAdapter(adapter);
+        loadData();
+        loadStatusData();
+
+
 
     }
+/*
+    @Override
+    public void onItemClick(int position) {
+        // Handle item click here
+        // For example:
+        Toast.makeText(this, "Item clicked at position " + position, Toast.LENGTH_SHORT).show();
+    }*/
 
     private void loadData() {
         Cursor cursor=dbHelper.getStudentTable(cid);
         studentItems.clear();
-        Toast.makeText(this, ""+cursor.getColumnIndex(DbHelper.S_ID)+" "+cursor.getColumnIndex(DbHelper.STUDENT_ROLL_KEY)+" "+cursor.getColumnIndex(DbHelper.STUDENT_NAME_KEY), Toast.LENGTH_SHORT).show();
         while (cursor.moveToNext()){
             @SuppressLint("Range") long sid= cursor.getLong(cursor.getColumnIndex(DbHelper.S_ID));
             @SuppressLint("Range") int roll = cursor.getInt(cursor.getColumnIndex(DbHelper.STUDENT_ROLL_KEY));
             @SuppressLint("Range") String name = cursor.getString(cursor.getColumnIndex(DbHelper.STUDENT_NAME_KEY));
             studentItems.add(new StudentItem(sid,roll,name));
+
         }
         cursor.close();
 
-        if (adapter != null) {
-            adapter.notifyDataSetChanged();
-        } else {
-            // Handle the case where studentAdapter is null
-            Toast.makeText(this, "studentAdapter is null", Toast.LENGTH_SHORT).show();
-        }
+
+
+        adapter.notifyDataSetChanged();
+
+
+
     }
 
     private void changeStatus(int position) {
         String status=studentItems.get(position).getStatus();
+
+
 
         if(status.equals("P")) status="A";
         else  status="P";
@@ -107,9 +118,10 @@ public class StudentActivity extends AppCompatActivity {
         save.setOnClickListener(v -> saveStatus());
 
 
-        title.setText(className);
+
         if(calender!=null){
-            subtitle.setText(subjectName+" | "+calender.getDate());
+            title.setText(className+" | "+calender.getDate());
+            subtitle.setText(subjectName);
 
         }
 
@@ -120,12 +132,15 @@ public class StudentActivity extends AppCompatActivity {
     }
 
     private void saveStatus() {
+
+        Toast.makeText(getApplicationContext(),"Saved",Toast.LENGTH_SHORT).show();
         for (StudentItem studentItem:studentItems){
             String status=studentItem.getStatus();
             if (status != "P") status="A";
             long value=dbHelper.addStatus(studentItem.getSid(),cid,calender.getDate(),status);
 
-            if (value==-1)dbHelper.updateStatus(studentItem.getSid(),calender.getDate(),status);
+            if (value==-1)
+                dbHelper.updateStatus(studentItem.getSid(),calender.getDate(),status);
         }
     }
 
@@ -144,7 +159,6 @@ public class StudentActivity extends AppCompatActivity {
             Toast.makeText(this, "null adapter", Toast.LENGTH_SHORT).show();
         }
 
-        Toast.makeText(getApplicationContext(), ""+studentItems.size(), Toast.LENGTH_SHORT).show();
 
     }
 
@@ -161,25 +175,30 @@ public class StudentActivity extends AppCompatActivity {
     }
 
     private void openSheetList() {
-        long[] idArray=new long[studentItems.size()];
-        String[] nameArray=new String[studentItems.size()];
-        int[] rollArray=new int[studentItems.size()];
+        int length = studentItems.size();
+        long[] idArray=new long[length];
+        String[] nameArray=new String[length];
+        long[] rollArray=new long[length];
 
-        for (int i=0;i<idArray.length;i++)
+        for (int i=0;i<length;i++)
             idArray[i]=studentItems.get(i).getSid();
 
-        for (int i=0;i<rollArray.length;i++)
-            rollArray[i]=studentItems.get(i).getRoll();
+        for (int j=0;j<length;j++)
+            rollArray[j]=studentItems.get(j).getRoll();
 
-        for (int i=0;i<nameArray.length;i++)
-            nameArray[i]=studentItems.get(i).getName();
+        for (int k=0;k<length;k++)
+            nameArray[k]=studentItems.get(k).getName();
+
+
+        Toast.makeText(this, ""+idArray[0]+" "+rollArray[0]+" "+nameArray[0], Toast.LENGTH_SHORT).show();
 
         Intent intent=new Intent(this,SheetListActivity.class);
         intent.putExtra("cid",cid);
         intent.putExtra("idArray",idArray);
         intent.putExtra("rollArray",rollArray);
         intent.putExtra("nameArray",nameArray);
-
+        intent.putExtra("classname",className);
+        intent.putExtra("subject",subjectName);
 
         startActivity(intent);
     }
@@ -192,7 +211,7 @@ public class StudentActivity extends AppCompatActivity {
 
     private void onCalendarOkClicked(int year, int month, int day) {
         calender.setDate(year,month,day);
-        subtitle.setText(subjectName+"|"+calender.getDate());
+        subtitle.setText(subjectName);
         loadStatusData();
 
     }
@@ -245,5 +264,11 @@ public class StudentActivity extends AppCompatActivity {
 
     public int getPosition() {
         return position;
+    }
+
+
+    @Override
+    public void onItemClick(int position) {
+        changeStatus(position);
     }
 }

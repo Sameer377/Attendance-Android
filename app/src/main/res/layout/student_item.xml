@@ -9,13 +9,16 @@
     app:cardElevation="0dp"
     app:cardPreventCornerOverlap="false"
     app:cardCornerRadius="4dp"
-    android:layout_height="64dp"
+    android:layout_height="wrap_content"
     android:id="@+id/cardview">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="39dp">
+        android:paddingLeft="20dp"
+        android:paddingRight="39dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp">
 
 
         <RelativeLayout
@@ -30,7 +33,7 @@
                 android:text="@string/_01"
                 android:textColor="#000000"
                 android:textSize="20sp"
-                android:id="@+id/roll"
+                android:id="@+id/roll1"
                 android:textStyle="bold"/>
 
             <TextView
@@ -39,7 +42,7 @@
                 android:text="@string/poonam_chabukswar"
                 android:textColor="#000000"
                 android:textSize="20sp"
-                android:id="@+id/name"
+                android:id="@+id/name1"
                 android:layout_marginLeft="56dp"
                 android:textStyle="bold"/>
 
@@ -51,7 +54,7 @@
                 android:textSize="20sp"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="5dp"
-                android:id="@+id/status"
+                android:id="@+id/status1"
                 android:textStyle="bold"/>
 
 
