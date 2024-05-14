@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/_add_new_class"
+            android:textColor="#000000"
+
+            android:textStyle="bold"
+            android:textSize="30sp"
+            android:layout_gravity="center_horizontal" />
+
+    <TextView
+            android:layout_margin="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#000000"/>
+
+    <EditText
+        android:id="@+id/class_edt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/_class_name"
+        android:layout_margin="8dp"/>
+
+
+    <EditText
+        android:id="@+id/subject_edt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/_subject_name"
+        android:layout_margin="8dp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/cancel_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:textSize="20sp"
+            android:text="@string/_cancel" />
+
+        <Button
+            android:id="@+id/add_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="8dp"
+            android:textSize="20sp"
+            android:text="@string/_add" />
+
+
+    </RelativeLayout>
+
+
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

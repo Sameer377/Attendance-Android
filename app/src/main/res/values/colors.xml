@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#021BFF</color>
+    <color name="colorPrimaryDark">#000BE6</color>
+    <color name="colorAccent">#1403FF</color>
+
+    <color name="present">#46DB12</color>
+    <color name="absent">#E84343</color>
+    <color name="normal">#FFFFFF</color>
+
+
+
+
+</resources>

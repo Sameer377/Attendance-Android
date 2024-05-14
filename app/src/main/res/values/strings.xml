@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Attendance App</string>
+    <string name="todo">TODO</string>
+    <string name="subject_name">Subject Name</string>
+    <string name="class_name">Class Name</string>
+    <string name="cancel">Cancel</string>
+    <string name="add_new_class">Add new Class</string>
+    <string name="Add">add</string>
+    <string name="add">Add</string>
+    <string name="class__name">Class Name</string>
+    <string name="subject__name">Subject Name</string>
+    <string name="Class_Name">Class Name</string>
+    <string name="edt01">edt01</string>
+    <string name="edt02">edt02</string>
+    <string name="Title">Title</string>
+    <string name="poonam_chabukswar">Poonam chabukswar</string>
+    <string name="title">Title</string>
+    <string name="subtitle">Subtitle</string>
+    <string name="p">P</string>
+    <string name="_01">01</string>
+    <string name="nov_2020">nov 2020</string>
+    <string name="_add">Add</string>
+    <string name="_cancel">Cancel</string>
+    <string name="_subject_name">Subject Name</string>
+    <string name="_class_name">Class Name</string>
+    <string name="_add_new_class">Add new class</string>
+</resources>
