@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -29,6 +31,12 @@ public class SheetActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         TextView title = toolbar.findViewById(R.id.title_toolbar);
         title.setText(intent.getExtras().get("month").toString());
+        ImageView save = toolbar.findViewById(R.id.save);
+        save.setVisibility(View.INVISIBLE);
+        ImageView back = toolbar.findViewById(R.id.back);
+        back.setOnClickListener(v->{
+            finish();
+        });
         TextView subTitle = toolbar.findViewById(R.id.subtitle_toolbar);
         subTitle.setText(subjectName);
         showTable();

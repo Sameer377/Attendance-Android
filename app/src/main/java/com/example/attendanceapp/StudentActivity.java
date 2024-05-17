@@ -105,12 +105,12 @@ public class StudentActivity extends AppCompatActivity implements  com.example.a
         studentItems.get(position).setStatus(status);
         adapter.notifyItemChanged(position);
     }
-
+    TextView title;
     private void setToolbar(){
 
 
         toolbar = findViewById(R.id.toolbar);
-        TextView title=toolbar.findViewById(R.id.title_toolbar);
+         title=toolbar.findViewById(R.id.title_toolbar);
         subtitle=toolbar.findViewById(R.id.subtitle_toolbar);
         calender=new MyCalender();
         ImageButton back=toolbar.findViewById(R.id.back);
@@ -211,7 +211,7 @@ public class StudentActivity extends AppCompatActivity implements  com.example.a
 
     private void onCalendarOkClicked(int year, int month, int day) {
         calender.setDate(year,month,day);
-        subtitle.setText(subjectName);
+        title.setText(className +" | "+calender.getDate());
         loadStatusData();
 
     }

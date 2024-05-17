@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,6 +39,12 @@ public class SheetListActivity extends AppCompatActivity {
         title.setText(getIntent().getExtras().get("classname").toString());
         TextView subTitle = toolbar.findViewById(R.id.subtitle_toolbar);
         subTitle.setText(subjectName);
+        ImageView back = toolbar.findViewById(R.id.back);
+        back.setOnClickListener(v->{
+            finish();
+        });
+        ImageView save = toolbar.findViewById(R.id.save);
+        save.setVisibility(View.INVISIBLE);
          idArray=getIntent().getLongArrayExtra("idArray");
          rollArray=getIntent().getLongArrayExtra("rollArray");
          nameArray=getIntent().getStringArrayExtra("nameArray");

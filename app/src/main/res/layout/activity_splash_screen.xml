@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent"
-    android:gravity="center"
     tools:context=".SplashScreen">
+<LinearLayout
+    android:layout_centerInParent="true"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
 
     <ImageView
         android:layout_width="200dp"
@@ -37,5 +42,21 @@
         android:fontFamily="serif"
         />
 
-
 </LinearLayout>
+
+    <TextView
+        android:layout_alignParentBottom="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:text="Project By : \n Ayesha Shaikh\nPoonam Chabukswar\nMunzareen Choudhary\nMadiha Patel"
+        android:textAlignment= "center"
+        android:textColor="#303352"
+        android:textSize="12dp"
+        android:textStyle="bold"
+        android:lineHeight="20dp"
+        android:fontFamily="serif"
+        />
+
+</RelativeLayout>
